@@ -29,7 +29,7 @@ export async function GET() {
       .onConflictDoNothing()
       .returning();
 
-    let templateId = template?.id;
+    let templateId: string | undefined = template?.id;
 
     // Get template if it already existed
     if (!templateId) {

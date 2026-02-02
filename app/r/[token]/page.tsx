@@ -231,16 +231,26 @@ export default function ReviewPage() {
               exit={{ opacity: 0, y: -20 }}
               className="bg-white rounded-2xl p-8 md:p-10 shadow-sm"
             >
-              {/* Logo if available */}
-              {client?.account?.logoUrl && (
-                <div className="flex justify-center mb-6">
+              {/* Business branding header */}
+              <div className="flex flex-col items-center mb-6">
+                {client?.account?.logoUrl ? (
                   <img 
                     src={client.account.logoUrl} 
                     alt={businessName}
-                    className="h-12 object-contain"
+                    className="h-14 object-contain mb-2"
                   />
-                </div>
-              )}
+                ) : (
+                  <div 
+                    className="w-14 h-14 rounded-full flex items-center justify-center text-white text-xl font-bold mb-2"
+                    style={{ backgroundColor: primaryColor }}
+                  >
+                    {businessName.charAt(0).toUpperCase()}
+                  </div>
+                )}
+                <p className="text-sm font-medium text-slate-600">
+                  {businessName}
+                </p>
+              </div>
 
               <div className="text-center mb-8">
                 <h1 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
@@ -289,6 +299,11 @@ export default function ReviewPage() {
               exit={{ opacity: 0, y: -20 }}
               className="bg-white rounded-2xl p-8 md:p-10 shadow-sm"
             >
+              {/* Business branding - subtle */}
+              <div className="flex justify-center mb-4">
+                <p className="text-xs text-slate-400">{businessName}</p>
+              </div>
+              
               <div className="text-center mb-4">
                 {/* Show their rating */}
                 <div className="flex justify-center gap-1 mb-3">
@@ -388,6 +403,11 @@ export default function ReviewPage() {
               exit={{ opacity: 0, y: -20 }}
               className="bg-white rounded-2xl p-8 md:p-10 shadow-sm"
             >
+              {/* Business branding - subtle */}
+              <div className="flex justify-center mb-4">
+                <p className="text-xs text-slate-400">{businessName}</p>
+              </div>
+              
               <div className="text-center mb-6">
                 {/* Show their rating */}
                 <div className="flex justify-center gap-1 mb-3">
@@ -454,6 +474,24 @@ export default function ReviewPage() {
               animate={{ opacity: 1, y: 0 }}
               className="bg-white rounded-2xl p-8 md:p-10 shadow-sm text-center"
             >
+              {/* Business branding */}
+              <div className="flex justify-center mb-4">
+                {client?.account?.logoUrl ? (
+                  <img 
+                    src={client.account.logoUrl} 
+                    alt={businessName}
+                    className="h-10 object-contain"
+                  />
+                ) : (
+                  <div 
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold"
+                    style={{ backgroundColor: primaryColor }}
+                  >
+                    {businessName.charAt(0).toUpperCase()}
+                  </div>
+                )}
+              </div>
+              
               <div className="text-5xl mb-6">🙏</div>
               <h2 className="text-2xl font-bold text-slate-900 mb-3">
                 Thank you, {clientFirstName}!

@@ -22,11 +22,11 @@ async function seedTestClient() {
     .onConflictDoNothing()
     .returning();
 
-  const templateId = template?.id;
+  const templateId: string | undefined = template?.id;
   console.log("Template created:", templateId || "already exists");
 
   // Get template if it already existed
-  let finalTemplateId = templateId;
+  let finalTemplateId: string | undefined = templateId;
   if (!templateId) {
     const existing = await db.query.industryTemplates.findFirst({
       where: (t, { eq }) => eq(t.slug, "fitness-coach"),
