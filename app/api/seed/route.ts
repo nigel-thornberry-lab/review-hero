@@ -39,17 +39,24 @@ export async function GET() {
       templateId = existing?.id;
     }
 
-    // 2. Create a test account
-    const [account] = await db
-      .insert(accounts)
-      .values({
-        businessName: "Joe's Fitness Studio",
-        email: "joe@fitness.com",
-        industryTemplateId: templateId,
-        googlePlaceId: "ChIJN1t_tDeuEmsRUsoyG83frY4", // Sydney Opera House (test)
-        primaryColor: "#6366F1",
-      })
-      .returning();
+    // 2. Create or get test account
+    let account = await db.query.accounts.findFirst({
+      where: (a, { eq }) => eq(a.email, "joe@fitness.com"),
+    });
+
+    if (!account) {
+      const [newAccount] = await db
+        .insert(accounts)
+        .values({
+          businessName: "Joe's Fitness Studio",
+          email: "joe@fitness.com",
+          industryTemplateId: templateId,
+          googlePlaceId: "ChIJN1t_tDeuEmsRUsoyG83frY4", // Sydney Opera House (test)
+          primaryColor: "#6366F1",
+        })
+        .returning();
+      account = newAccount;
+    }
 
     // 3. Create a test client
     const [client] = await db
@@ -68,6 +75,7 @@ export async function GET() {
       success: true,
       templateId,
       accountId: account.id,
+      businessName: account.businessName,
       clientId: client.id,
       reviewLink: `/r/${client.token}`,
     });
