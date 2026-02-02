@@ -70,7 +70,7 @@ export const whopWebhookSchema = z.object({
 
 export type ValidationResult<T> =
   | { success: true; data: T }
-  | { success: false; error: z.ZodError };
+  | { success: false; errors: Array<{ path: string; message: string }> };
 
 export function validateInput<T>(
   schema: z.ZodSchema<T>,
@@ -80,5 +80,10 @@ export function validateInput<T>(
   if (result.success) {
     return { success: true, data: result.data };
   }
-  return { success: false, error: result.error };
+  // Transform Zod errors to simpler format
+  const errors = result.error.issues.map((issue) => ({
+    path: issue.path.join("."),
+    message: issue.message,
+  }));
+  return { success: false, errors };
 }
