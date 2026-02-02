@@ -1,65 +1,159 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { Button } from "@/components/ui/button";
+import { Star, Shield, Users, Zap, ArrowRight, CheckCircle } from "lucide-react";
+import Link from "next/link";
+
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      {/* Header */}
+      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <Star className="w-5 h-5 text-white" />
+            </div>
+            <span className="font-bold text-xl">Review Hero</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <Link href="/dashboard" className="text-sm text-muted-foreground hover:text-foreground">
+              Dashboard
+            </Link>
+            <Button asChild>
+              <Link href="/api/auth/whop">Get Started</Link>
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="max-w-6xl mx-auto px-4 py-20 text-center">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-sm font-medium text-primary mb-6">
+          <Zap className="w-4 h-4" />
+          Now available on WHOP
+        </div>
+        
+        <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">
+          Get more reviews.
+          <br />
+          <span className="text-primary">Stop bad ones.</span>
+          <br />
+          Collect referrals.
+        </h1>
+        
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+          The review collection tool that works on autopilot. Send a request, 
+          intercept negative feedback, push 5-star reviews to Google, and turn 
+          happy customers into referral machines.
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <Button size="lg" asChild>
+            <Link href="/api/auth/whop">
+              Start Free Trial
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
+            <Link href="#how-it-works">See How It Works</Link>
+          </Button>
+        </div>
+
+        {/* Social proof */}
+        <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
+          <div className="flex items-center gap-1">
+            <CheckCircle className="w-4 h-4 text-green-500" />
+            <span>No credit card required</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <CheckCircle className="w-4 h-4 text-green-500" />
+            <span>Setup in 3 minutes</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <CheckCircle className="w-4 h-4 text-green-500" />
+            <span>Cancel anytime</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="max-w-6xl mx-auto px-4 py-20" id="how-it-works">
+        <h2 className="text-3xl font-bold text-center mb-4">How It Works</h2>
+        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+          Three simple steps to transform every happy customer into a 5-star review and warm referral.
+        </p>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {/* Feature 1 */}
+          <div className="bg-white rounded-2xl p-8 shadow-sm border">
+            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+              <Zap className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="font-semibold text-lg mb-2">1. Send a Request</h3>
+            <p className="text-muted-foreground">
+              Enter your customer&apos;s name and email or phone. We send a beautiful, 
+              personalized review request automatically.
+            </p>
+          </div>
+
+          {/* Feature 2 */}
+          <div className="bg-white rounded-2xl p-8 shadow-sm border">
+            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+              <Shield className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="font-semibold text-lg mb-2">2. Smart Routing</h3>
+            <p className="text-muted-foreground">
+              Happy customers (4-5 stars) go to Google. Unhappy ones stay private 
+              so you can fix issues before they go public.
+            </p>
+          </div>
+
+          {/* Feature 3 */}
+          <div className="bg-white rounded-2xl p-8 shadow-sm border">
+            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+              <Users className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="font-semibold text-lg mb-2">3. Collect Referrals</h3>
+            <p className="text-muted-foreground">
+              After leaving a review, we ask for referrals. Turn one happy 
+              customer into two or three warm leads.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="max-w-6xl mx-auto px-4 py-20">
+        <div className="bg-primary rounded-3xl p-12 text-center text-white">
+          <h2 className="text-3xl font-bold mb-4">Ready to get more reviews?</h2>
+          <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
+            Join thousands of businesses using Review Hero to build their 
+            reputation and grow through referrals.
           </p>
+          <Button size="lg" variant="secondary" asChild>
+            <Link href="/api/auth/whop">
+              Start Your Free Trial
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
+          </Button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t py-8">
+        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between text-sm text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-primary rounded flex items-center justify-center">
+              <Star className="w-4 h-4 text-white" />
+            </div>
+            <span>Review Hero</span>
+          </div>
+          <div>
+            © {new Date().getFullYear()} Review Hero. All rights reserved.
+          </div>
         </div>
-      </main>
+      </footer>
     </div>
   );
 }

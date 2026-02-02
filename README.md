@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Review Hero
+
+> Get more reviews. Stop bad ones. Collect referrals.
+
+A universal review collection and referral generation tool for the WHOP marketplace.
+
+## Features
+
+- **Smart Review Routing**: 4-5 star reviews go to Google, 1-3 star reviews stay private
+- **Negative Review Interception**: Fix issues before they become public problems
+- **Referral Collection**: Turn happy customers into warm leads
+- **Industry Templates**: 20+ pre-built templates for different business types
+- **Automated Nudges**: Smart follow-ups increase completion rates
+- **Embeddable Widget**: Display reviews on your website
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Database**: Neon (Serverless Postgres) + Drizzle ORM
+- **Auth**: WHOP OAuth
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- Neon database account
+- WHOP developer account
+
+### Installation
 
 ```bash
+# Clone the repo
+git clone https://github.com/yourusername/review-hero.git
+cd review-hero
+
+# Install dependencies
+npm install
+
+# Copy environment variables
+cp .env.local.example .env.local
+
+# Edit .env.local with your credentials
+
+# Run database migrations
+npm run db:push
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+See `.env.local.example` for required environment variables.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+```
+review-hero/
+├── app/                    # Next.js app router pages
+├── components/             # React components
+├── lib/
+│   ├── db/                # Database schema and client
+│   ├── whop/              # WHOP integration
+│   ├── security/          # Rate limiting, validation
+│   └── templates/         # Industry templates
+└── public/                # Static assets
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run db:push      # Push schema to database
+npm run db:studio    # Open Drizzle Studio
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
