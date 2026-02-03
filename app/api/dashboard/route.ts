@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
 
     // Calculate stats
     const totalSent = allClients.filter((c) => c.status !== "pending").length;
-    const totalReviewed = allClients.filter((c) => c.status === "reviewed").length;
+    const totalReviewed = allReviews.length; // Use actual reviews count
     const totalClicked = allClients.filter(
       (c) => c.status === "clicked" || c.openedAt
     ).length;
@@ -42,9 +42,9 @@ export async function GET(request: NextRequest) {
       (r) => r.createdAt >= monthStart
     );
 
-    // Conversion rate
+    // Conversion rate (reviews received / requests sent)
     const conversionRate =
-      totalSent > 0 ? Math.round((totalReviewed / totalSent) * 100) : 0;
+      totalSent > 0 ? Math.round((allReviews.length / totalSent) * 100) : 0;
 
     // Average rating
     const avgRating =
