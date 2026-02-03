@@ -9,7 +9,6 @@ import { rateLimiters, getClientIdentifier } from "@/lib/security/rate-limit";
 import {
   ReviewRequestEmail,
   getReviewRequestSubject,
-  getReviewRequestFromName,
 } from "@/lib/email/templates";
 
 // Initialize Resend (only if API key is present)
@@ -86,8 +85,9 @@ export async function POST(request: NextRequest) {
 
     if (resend) {
       try {
-        const fromName = getReviewRequestFromName(account.businessName);
-        const fromEmail = `${fromName} <reviews@${process.env.EMAIL_DOMAIN || "reviewhero.app"}>`;
+        // Use Resend's default sender for testing (no domain verification needed)
+        // In production, use verified domain: `${fromName} <reviews@reviewhero.app>`
+        const fromEmail = process.env.EMAIL_FROM || "Review Hero <onboarding@resend.dev>";
         const subject = getReviewRequestSubject(account.businessName);
 
         await resend.emails.send({
